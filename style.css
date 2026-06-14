@@ -100,19 +100,6 @@ button:hover {
 
   margin-top: 10px;
 }
-
-.book-item {
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-  background: transparent;
-}
-
-.book-item:hover {
-  background: #2a2a2a;
-}
-
 .content {
   height: 100vh;
   overflow-y: auto;
@@ -150,10 +137,43 @@ button:hover {
   pointer-events: none;
   z-index: 10;
 }
-#book-title {
-  font-size: 32px;
-  margin-bottom: 20px;
-  text-align: center;
+
+.book-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  gap: 10px;
+}
+
+.book-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-btn {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  opacity: 0.6;
+}
+
+.delete-btn:hover {
+  opacity: 1;
 }
 
 #book-text {
@@ -167,6 +187,17 @@ button:hover {
   font-size: 16px;
 
   color: #d0d0d0;
+}
+/* Иконки для кнопок */
+.delete-btn img {
+  filter: brightness(0) invert(1);
+}
+.menu-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+
+  filter: brightness(0) invert(1);
 }
 
 ::-webkit-scrollbar {

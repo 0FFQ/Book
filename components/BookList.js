@@ -1,22 +1,26 @@
-const BookItem = require('./BookItem')
+const Component = require('./Component')
 
-function BookList(books, actions) {
-  const list = document.createElement('div')
-  list.id = 'list'
-
-  if (!books.length) {
-    const empty = document.createElement('div')
-    empty.textContent = 'Нет книг'
-    empty.style.opacity = '0.5'
-    list.appendChild(empty)
-    return list
+class BookList extends Component {
+  constructor(state, actions) {
+    super(state, actions)
   }
 
-  books.forEach(book => {
-    list.appendChild(BookItem(book, actions))
-  })
+  render() {
+    const list = document.createElement('div')
+    list.id = 'list'
 
-  return list
+    this.state.filtered.forEach(book => {
+      const item = document.createElement('div')
+      item.className = 'book-item'
+      item.textContent = book.title
+
+      item.onclick = () => this.actions.openBook(book)
+
+      list.appendChild(item)
+    })
+
+    return list
+  }
 }
 
 module.exports = BookList
