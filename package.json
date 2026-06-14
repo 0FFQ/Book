@@ -8,8 +8,10 @@
   },
   "build": {
     "appId": "com.bookshelf.app",
-    "name": "books",
     "productName": "Книги",
+    "directories": {
+      "output": "dist"
+    },
     "files": [
       "**/*"
     ],
