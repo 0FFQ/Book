@@ -4,16 +4,28 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "clean": "rimraf dist",
+    "build": "npm run clean && electron-builder --win nsis",
+    "build:dir": "npm run clean && electron-builder --dir",
+    "rebuild": "npm run clean && npm install && electron-builder --win nsis"
   },
   "build": {
     "appId": "com.bookshelf.app",
     "productName": "Книги",
+    "asar": false,
     "directories": {
       "output": "dist"
     },
     "files": [
-      "**/*"
+      "main.js",
+      "renderer.js",
+      "index.html",
+      "style.css",
+      "components/**/*",
+      "ipc/**/*",
+      "assets/**/*",
+      "package.json"
     ],
     "win": {
       "target": "nsis",
@@ -25,7 +37,8 @@
     }
   },
   "devDependencies": {
-    "electron": "^latest",
-    "electron-builder": "^26.15.3"
+    "electron": "^42.4.0",
+    "electron-builder": "^26.15.3",
+    "rimraf": "^6.1.3"
   }
 }
