@@ -101,6 +101,7 @@ class AddBookModal {
     this.box.appendChild(this.titleInput)
   }
 
+
   createTextAreaWithFile() {
     const wrap = document.createElement('div')
 
@@ -180,8 +181,10 @@ class AddBookModal {
 
     if (!title || !content) return
 
-    const books = Storage.getBooks()
+    const books = Storage.getBooks() || []
+
     books.push({ title, content })
+
     Storage.saveBooks(books)
 
     this.close()

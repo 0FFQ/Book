@@ -3,30 +3,43 @@ const Component = require('./Component')
 class BookReader extends Component {
   constructor(state, actions) {
     super(state, actions)
+
+    this.el = null
+    this.titleEl = null
+    this.textEl = null
   }
 
-  render() {
-    const container = document.createElement('div')
-    container.className = 'content'
+  mount() {
+    if (!this.el) {
+      this.el = document.createElement('div')
+      this.el.className = 'content'
 
-    const title = document.createElement('h2')
-    title.id = 'book-title'
+      this.titleEl = document.createElement('h2')
+      this.titleEl.id = 'book-title'
 
-    const text = document.createElement('pre')
-    text.id = 'book-text'
+      this.textEl = document.createElement('pre')
+      this.textEl.id = 'book-text'
 
-    if (this.state.currentBook) {
-      title.textContent = this.state.currentBook.title
-      text.textContent = this.state.currentBook.content
-    } else {
-      title.textContent = ''
-      text.textContent = ''
+      this.el.appendChild(this.titleEl)
+      this.el.appendChild(this.textEl)
     }
 
-    container.appendChild(title)
-    container.appendChild(text)
+    this.update()
 
-    return container
+    return this.el
+  }
+
+  update() {
+    const book = this.state.currentBook
+
+    if (!book) {
+      this.titleEl.textContent = ''
+      this.textEl.textContent = ''
+      return
+    }
+
+    this.titleEl.textContent = book.title
+    this.textEl.textContent = book.content
   }
 }
 

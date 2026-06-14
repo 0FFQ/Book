@@ -10,6 +10,13 @@ let state = {
   currentBook: null
 }
 
+let uiState = {
+  sidebarOpen: true
+}
+
+let addBookModalInstance = null
+let isModalOpen = false
+
 const actions = {
   search: (text) => {
     state.filtered = state.books.filter(b =>
@@ -25,6 +32,7 @@ const actions = {
 
   removeBook: (book) => {
     let books = Storage.getBooks()
+
     books = books.filter(b => b.title !== book.title)
 
     Storage.saveBooks(books)
@@ -36,23 +44,39 @@ const actions = {
   },
 
   openAddModal: () => {
-    const modal = new AddBookModal(() => {
+    if (isModalOpen) return
+
+    isModalOpen = true
+
+    addBookModalInstance = new AddBookModal(() => {
       state.books = Storage.getBooks()
       state.filtered = state.books
-      updateBookList()
-      updateHeader()
+      render()
+
+      isModalOpen = false
     })
 
-    modal.open()
+    const oldClose = addBookModalInstance.close.bind(addBookModalInstance)
+
+    addBookModalInstance.close = () => {
+      oldClose()
+      isModalOpen = false
+    }
+
+    addBookModalInstance.open()
   }
 }
 
 function render() {
-  document.body.innerHTML = ''
+  const app = document.getElementById('app')
+  app.innerHTML = ''
 
-  document.body.appendChild(new Sidebar(state, actions).mount())
-  document.body.appendChild(new BookReader(state, actions).mount())
-  document.body.appendChild(new MenuButton().mount())
+  const sidebar = new Sidebar(state, actions)
+  sidebar.setOpen?.(uiState.sidebarOpen) // если есть метод
+
+  app.appendChild(sidebar.mount())
+  app.appendChild(new BookReader(state, actions).mount())
+  app.appendChild(new MenuButton().mount())
 }
 
 render()
