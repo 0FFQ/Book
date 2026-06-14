@@ -10,7 +10,7 @@ app.whenReady().then(() => {
   win = new BrowserWindow({
     width: 1500,
     height: 1000,
-    icon: path.join(__dirname, 'assets/icon.png'),
+    icon: path.join(__dirname, 'assets/icon.ico'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false

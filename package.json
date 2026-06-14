@@ -18,10 +18,14 @@
     "win": {
       "target": "nsis",
       "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   },
   "devDependencies": {
-    "electron": "^42.4.0",
+    "electron": "^latest",
     "electron-builder": "^26.15.3"
   }
 }
