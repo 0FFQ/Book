@@ -14,11 +14,9 @@ function BookItem(book, actions) {
 
   const delBtn = document.createElement('button')
 
-  const closeIcon = `
-    <img src="assets/close.png" class="menu-icon">
-  `
+  const deleteIcon = `<img src="assets/delete.png" class="menu-icon">`
   
-  delBtn.innerHTML = closeIcon
+  delBtn.innerHTML = deleteIcon
 
   delBtn.style.width = '32px'
   delBtn.style.height = '32px'
